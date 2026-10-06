@@ -1,0 +1,28 @@
+kind = "web"
+previewPath = "/"
+title = "NutriPlan AI"
+description = "A personalized meal-planning app that helps people meet nutrition goals, plan around dietary needs and pantry ingredients, and keep grocery spending on budget."
+version = "1.0.0"
+id = "artifacts/nutriplan-ai"
+router = "path"
+
+[[services]]
+name = "web"
+paths = [ "/" ]
+localPort = 25513
+
+[services.development]
+run = "pnpm --filter @workspace/nutriplan-ai run dev"
+
+[services.production]
+build = [ "pnpm", "--filter", "@workspace/nutriplan-ai", "run", "build" ]
+serve = "static"
+publicDir = "artifacts/nutriplan-ai/dist/public"
+
+[[services.production.rewrites]]
+from = "/*"
+to = "/index.html"
+
+[services.env]
+PORT = "25513"
+BASE_PATH = "/"

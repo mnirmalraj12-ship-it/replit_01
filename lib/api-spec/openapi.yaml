@@ -3,13 +3,15 @@ info:
   # Do not change the title, if the title changes, the import paths will be broken
   title: Api
   version: 0.1.0
-  description: API specification
+  description: NutriPlan AI meal planning API
 servers:
   - url: /api
     description: Base API path
 tags:
   - name: health
     description: Health operations
+  - name: app
+    description: NutriPlan AI application data
 paths:
   /healthz:
     get:
@@ -24,7 +26,342 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/HealthStatus"
+  /dashboard:
+    get:
+      operationId: getDashboard
+      tags: [app]
+      summary: Get the dashboard overview
+      responses:
+        "200":
+          description: Dashboard data
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Dashboard"
+  /preferences:
+    get:
+      operationId: getPreferences
+      tags: [app]
+      summary: Get demo user preferences
+      responses:
+        "200":
+          description: Preferences
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Preferences"
+    put:
+      operationId: savePreferences
+      tags: [app]
+      summary: Save meal-planning preferences
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/PreferencesInput"
+      responses:
+        "200":
+          description: Saved preferences
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Preferences"
+  /recipes:
+    get:
+      operationId: listRecipes
+      tags: [app]
+      summary: List and filter recipes
+      parameters:
+        - name: search
+          in: query
+          schema: { type: string }
+        - name: diet
+          in: query
+          schema: { type: string }
+        - name: category
+          in: query
+          schema: { type: string }
+      responses:
+        "200":
+          description: Recipe list
+          content:
+            application/json:
+              schema:
+                type: array
+                items: { $ref: "#/components/schemas/Recipe" }
+  /recipes/{recipeId}:
+    get:
+      operationId: getRecipe
+      tags: [app]
+      summary: Get one recipe
+      parameters:
+        - $ref: "#/components/parameters/RecipeId"
+      responses:
+        "200":
+          description: Recipe
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/Recipe" }
+        "404": { description: Recipe not found }
+  /pantry:
+    get:
+      operationId: listPantry
+      tags: [app]
+      summary: List pantry ingredients
+      responses:
+        "200":
+          description: Pantry items
+          content:
+            application/json:
+              schema:
+                type: array
+                items: { $ref: "#/components/schemas/PantryItem" }
+    post:
+      operationId: addPantryItem
+      tags: [app]
+      summary: Add a pantry ingredient
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: "#/components/schemas/PantryItemInput" }
+      responses:
+        "201":
+          description: Pantry item
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/PantryItem" }
+  /pantry/{itemId}:
+    put:
+      operationId: updatePantryItem
+      tags: [app]
+      summary: Update a pantry ingredient
+      parameters:
+        - $ref: "#/components/parameters/ItemId"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: "#/components/schemas/PantryItemInput" }
+      responses:
+        "200":
+          description: Updated pantry item
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/PantryItem" }
+    delete:
+      operationId: deletePantryItem
+      tags: [app]
+      summary: Delete a pantry ingredient
+      parameters:
+        - $ref: "#/components/parameters/ItemId"
+      responses:
+        "204": { description: Deleted }
+  /meal-plans:
+    get:
+      operationId: listMealPlans
+      tags: [app]
+      summary: List saved meal plans
+      responses:
+        "200":
+          description: Meal plans
+          content:
+            application/json:
+              schema:
+                type: array
+                items: { $ref: "#/components/schemas/MealPlan" }
+  /meal-plans/generate:
+    post:
+      operationId: generateMealPlan
+      tags: [app]
+      summary: Generate a meal plan using current preferences
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: "#/components/schemas/GeneratePlanInput" }
+      responses:
+        "201":
+          description: Generated plan
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/MealPlan" }
+        "422":
+          description: The current requirements cannot be satisfied
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/Error" }
+  /meal-plans/{planId}:
+    get:
+      operationId: getMealPlan
+      tags: [app]
+      summary: Get a meal plan
+      parameters:
+        - $ref: "#/components/parameters/PlanId"
+      responses:
+        "200":
+          description: Meal plan
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/MealPlan" }
+        "404": { description: Plan not found }
+  /meal-plans/{planId}/replace-meal:
+    post:
+      operationId: replacePlanMeal
+      tags: [app]
+      summary: Replace a meal within a plan
+      parameters:
+        - $ref: "#/components/parameters/PlanId"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: "#/components/schemas/ReplaceMealInput" }
+      responses:
+        "200":
+          description: Updated plan
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/MealPlan" }
+  /shopping-list/{planId}:
+    get:
+      operationId: getShoppingList
+      tags: [app]
+      summary: Calculate shopping list for a meal plan
+      parameters:
+        - $ref: "#/components/parameters/PlanId"
+      responses:
+        "200":
+          description: Consolidated shopping list
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ShoppingList" }
+  /shopping-items:
+    post:
+      operationId: addShoppingItem
+      tags: [app]
+      summary: Add a custom shopping-list item
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: "#/components/schemas/ShoppingItemInput" }
+      responses:
+        "201":
+          description: Shopping item
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ShoppingItem" }
+  /shopping-items/{itemId}:
+    put:
+      operationId: updateShoppingItem
+      tags: [app]
+      summary: Update a shopping-list item
+      parameters:
+        - $ref: "#/components/parameters/ItemId"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: "#/components/schemas/ShoppingItemInput" }
+      responses:
+        "200":
+          description: Updated item
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ShoppingItem" }
+    delete:
+      operationId: deleteShoppingItem
+      tags: [app]
+      summary: Delete a shopping-list item
+      parameters:
+        - $ref: "#/components/parameters/ItemId"
+      responses:
+        "204": { description: Deleted }
+  /favorites:
+    get:
+      operationId: listFavorites
+      tags: [app]
+      summary: List favorite recipes
+      responses:
+        "200":
+          description: Favorite recipes
+          content:
+            application/json:
+              schema:
+                type: array
+                items: { $ref: "#/components/schemas/Recipe" }
+    post:
+      operationId: addFavorite
+      tags: [app]
+      summary: Favorite a recipe
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: "#/components/schemas/FavoriteInput" }
+      responses:
+        "201":
+          description: Favorite added
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/Recipe" }
+  /favorites/{recipeId}:
+    delete:
+      operationId: removeFavorite
+      tags: [app]
+      summary: Remove a favorite
+      parameters:
+        - $ref: "#/components/parameters/RecipeId"
+      responses:
+        "204": { description: Removed }
+  /nutrition:
+    get:
+      operationId: getNutrition
+      tags: [app]
+      summary: Get nutrition progress and weekly trends
+      responses:
+        "200":
+          description: Nutrition overview
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/NutritionOverview" }
+  /search:
+    get:
+      operationId: searchApp
+      tags: [app]
+      summary: Search recipes, ingredients, and plans
+      parameters:
+        - name: q
+          in: query
+          required: true
+          schema: { type: string, minLength: 1 }
+      responses:
+        "200":
+          description: Search results
+          content:
+            application/json:
+              schema:
+                type: array
+                items: { $ref: "#/components/schemas/SearchResult" }
 components:
+  parameters:
+    RecipeId:
+      name: recipeId
+      in: path
+      required: true
+      schema: { type: string }
+    ItemId:
+      name: itemId
+      in: path
+      required: true
+      schema: { type: string }
+    PlanId:
+      name: planId
+      in: path
+      required: true
+      schema: { type: string }
   schemas:
     HealthStatus:
       type: object
@@ -33,4 +370,222 @@ components:
           type: string
       required:
         - status
+    Error:
+      type: object
+      required: [error]
+      properties:
+        error: { type: string }
+    Preferences:
+      type: object
+      required: [goal, diet, budget, budgetPeriod, currency, calories, protein, carbs, fat, fiber, allergies, excludedIngredients, cuisine, cookingTime, mealsPerDay, servings, autoNutrition]
+      properties:
+        goal: { type: string }
+        diet: { type: string }
+        budget: { type: number }
+        budgetPeriod: { type: string }
+        currency: { type: string }
+        calories: { type: integer }
+        protein: { type: integer }
+        carbs: { type: integer }
+        fat: { type: integer }
+        fiber: { type: integer }
+        allergies: { type: array, items: { type: string } }
+        excludedIngredients: { type: array, items: { type: string } }
+        cuisine: { type: string }
+        cookingTime: { type: integer }
+        mealsPerDay: { type: integer }
+        servings: { type: integer }
+        autoNutrition: { type: boolean }
+    PreferencesInput:
+      type: object
+      required: [goal, diet, budget, budgetPeriod, currency, calories, protein, carbs, fat, fiber, allergies, excludedIngredients, cuisine, cookingTime, mealsPerDay, servings, autoNutrition]
+      properties:
+        goal: { type: string }
+        diet: { type: string }
+        budget: { type: number, minimum: 0 }
+        budgetPeriod: { type: string, enum: [daily, weekly, monthly] }
+        currency: { type: string }
+        calories: { type: integer, minimum: 500 }
+        protein: { type: integer, minimum: 0 }
+        carbs: { type: integer, minimum: 0 }
+        fat: { type: integer, minimum: 0 }
+        fiber: { type: integer, minimum: 0 }
+        allergies: { type: array, items: { type: string } }
+        excludedIngredients: { type: array, items: { type: string } }
+        cuisine: { type: string }
+        cookingTime: { type: integer, minimum: 5 }
+        mealsPerDay: { type: integer, minimum: 1, maximum: 6 }
+        servings: { type: integer, minimum: 1, maximum: 12 }
+        autoNutrition: { type: boolean }
+    Nutrition:
+      type: object
+      required: [calories, protein, carbs, fat, fiber]
+      properties:
+        calories: { type: integer }
+        protein: { type: number }
+        carbs: { type: number }
+        fat: { type: number }
+        fiber: { type: number }
+    Ingredient:
+      type: object
+      required: [name, quantity, unit, category]
+      properties:
+        name: { type: string }
+        quantity: { type: number }
+        unit: { type: string }
+        category: { type: string }
+    Recipe:
+      type: object
+      required: [id, name, description, cuisine, diet, allergens, ingredients, nutrition, cost, cookingTime, servings, instructions, image]
+      properties:
+        id: { type: string }
+        name: { type: string }
+        description: { type: string }
+        cuisine: { type: string }
+        diet: { type: array, items: { type: string } }
+        allergens: { type: array, items: { type: string } }
+        ingredients:
+          type: array
+          items: { $ref: "#/components/schemas/Ingredient" }
+        nutrition: { $ref: "#/components/schemas/Nutrition" }
+        cost: { type: number }
+        cookingTime: { type: integer }
+        servings: { type: integer }
+        instructions: { type: array, items: { type: string } }
+        image: { type: string }
+    PantryItem:
+      type: object
+      required: [id, name, quantity, unit, category, expiryDate]
+      properties:
+        id: { type: string }
+        name: { type: string }
+        quantity: { type: number }
+        unit: { type: string }
+        category: { type: string }
+        expiryDate: { type: ["string", "null"], format: date }
+    PantryItemInput:
+      type: object
+      required: [name, quantity, unit, category, expiryDate]
+      properties:
+        name: { type: string, minLength: 1 }
+        quantity: { type: number, minimum: 0 }
+        unit: { type: string }
+        category: { type: string }
+        expiryDate: { type: ["string", "null"], format: date }
+    PlannedMeal:
+      type: object
+      required: [id, day, mealType, recipe, servings]
+      properties:
+        id: { type: string }
+        day: { type: string }
+        mealType: { type: string }
+        recipe: { $ref: "#/components/schemas/Recipe" }
+        servings: { type: integer }
+    MealPlan:
+      type: object
+      required: [id, createdAt, days, estimatedCost, budget, nutrition, duration]
+      properties:
+        id: { type: string }
+        createdAt: { type: string, format: date-time }
+        days:
+          type: array
+          items:
+            type: object
+            required: [date, meals]
+            properties:
+              date: { type: string, format: date }
+              meals:
+                type: array
+                items: { $ref: "#/components/schemas/PlannedMeal" }
+        estimatedCost: { type: number }
+        budget: { type: number }
+        nutrition: { $ref: "#/components/schemas/Nutrition" }
+        duration: { type: integer }
+    GeneratePlanInput:
+      type: object
+      required: [duration]
+      properties:
+        duration: { type: integer, minimum: 1, maximum: 14 }
+        optimizeBudget: { type: boolean, default: true }
+    ReplaceMealInput:
+      type: object
+      required: [mealId]
+      properties:
+        mealId: { type: string }
+    ShoppingItem:
+      type: object
+      required: [id, name, quantity, unit, category, estimatedPrice, purchased]
+      properties:
+        id: { type: string }
+        name: { type: string }
+        quantity: { type: number }
+        unit: { type: string }
+        category: { type: string }
+        estimatedPrice: { type: number }
+        purchased: { type: boolean }
+    ShoppingItemInput:
+      type: object
+      required: [name, quantity, unit, category, estimatedPrice, purchased, planId]
+      properties:
+        name: { type: string, minLength: 1 }
+        quantity: { type: number, minimum: 0 }
+        unit: { type: string }
+        category: { type: string }
+        estimatedPrice: { type: number, minimum: 0 }
+        purchased: { type: boolean }
+        planId: { type: string }
+    ShoppingList:
+      type: object
+      required: [planId, items, totalCost, pantryCoverage]
+      properties:
+        planId: { type: string }
+        items:
+          type: array
+          items: { $ref: "#/components/schemas/ShoppingItem" }
+        totalCost: { type: number }
+        pantryCoverage: { type: number }
+    FavoriteInput:
+      type: object
+      required: [recipeId]
+      properties:
+        recipeId: { type: string }
+    NutritionOverview:
+      type: object
+      required: [target, consumed, weekly, insights]
+      properties:
+        target: { $ref: "#/components/schemas/Nutrition" }
+        consumed: { $ref: "#/components/schemas/Nutrition" }
+        weekly:
+          type: array
+          items:
+            type: object
+            required: [day, nutrition, cost]
+            properties:
+              day: { type: string }
+              nutrition: { $ref: "#/components/schemas/Nutrition" }
+              cost: { type: number }
+        insights: { type: array, items: { type: string } }
+    Dashboard:
+      type: object
+      required: [preferences, pantryCount, favoriteCount, currentPlan, todayMeals, expiringItems, weeklyNutrition]
+      properties:
+        preferences: { $ref: "#/components/schemas/Preferences" }
+        pantryCount: { type: integer }
+        favoriteCount: { type: integer }
+        currentPlan: { $ref: "#/components/schemas/MealPlan" }
+        todayMeals:
+          type: array
+          items: { $ref: "#/components/schemas/PlannedMeal" }
+        expiringItems:
+          type: array
+          items: { $ref: "#/components/schemas/PantryItem" }
+        weeklyNutrition: { $ref: "#/components/schemas/NutritionOverview" }
+    SearchResult:
+      type: object
+      required: [id, title, type, description]
+      properties:
+        id: { type: string }
+        title: { type: string }
+        type: { type: string }
+        description: { type: string }
 

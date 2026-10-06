@@ -1,0 +1,1634 @@
+You are an expert full-stack engineer, UI/UX designer, database architect, and product developer.
+
+Build a COMPLETE, FULLY WORKING web application called:
+
+# NutriPlan AI
+
+Tagline:
+
+**"Plan smarter. Eat better. Spend less."**
+
+This is a personalized meal planning and nutrition platform.
+
+The application must generate meal plans based on:
+
+* User budget
+* Dietary preference
+* Allergies
+* Excluded ingredients
+* Available/pantry ingredients
+* Calorie requirements
+* Protein requirements
+* Carbohydrate requirements
+* Fat requirements
+* Fiber requirements
+* Fitness/health goal
+* Cuisine preference
+* Cooking time
+* Number of servings
+* Number of meals per day
+
+The result must be a polished, modern, responsive, functional website that can be demonstrated immediately.
+
+DO NOT create a static mockup.
+
+DO NOT create placeholder buttons that do nothing.
+
+Every major button and feature must work.
+
+---
+
+# 1. TECHNOLOGY
+
+Use this stack:
+
+Frontend:
+
+* React
+* TypeScript
+* Vite
+* Tailwind CSS
+* shadcn/ui
+* Lucide React
+* React Router
+* Recharts
+
+Backend:
+
+* Node.js
+* Express
+
+Database:
+
+* PostgreSQL
+* Drizzle ORM
+
+Validation:
+
+* Zod
+
+Use clean modular architecture.
+
+Do not put the entire application in one file.
+
+---
+
+# 2. IMPORTANT REQUIREMENT: THE WEBSITE MUST ACTUALLY WORK
+
+After creating the project:
+
+1. Install all dependencies.
+2. Configure the development server.
+3. Configure the database.
+4. Create the database schema.
+5. Create seed data.
+6. Create API routes.
+7. Connect frontend to backend.
+8. Implement all major functionality.
+9. Run the application.
+10. Check for TypeScript errors.
+11. Check for build errors.
+12. Fix all errors.
+13. Make sure navigation works.
+14. Make sure forms work.
+15. Make sure meal generation works.
+16. Make sure shopping-list generation works.
+17. Make sure pantry functionality works.
+18. Make sure nutrition calculations work.
+19. Make sure budget calculations work.
+
+Do not stop after generating the UI.
+
+---
+
+# 3. DESIGN DIRECTION
+
+Create a premium modern SaaS-style interface.
+
+Design characteristics:
+
+* Modern
+* Clean
+* Professional
+* Food/nutrition focused
+* Friendly
+* Minimal
+* Responsive
+* Fast
+* Accessible
+
+Primary visual language:
+
+* Green primary color
+* White/light neutral backgrounds
+* Dark text
+* Subtle gradients
+* Rounded cards
+* Soft shadows
+* Clean typography
+* Modern icons
+* Small animations
+* Excellent spacing
+
+Avoid excessive glassmorphism.
+
+Avoid overly colorful childish UI.
+
+The application should look like a real startup product.
+
+Support:
+
+* Desktop
+* Laptop
+* Tablet
+* Mobile
+
+Implement:
+
+* Light mode
+* Dark mode
+
+---
+
+# 4. RESPONSIVE APPLICATION SHELL
+
+Desktop layout:
+
+LEFT SIDEBAR
+
+Logo:
+
+NutriPlan AI
+
+Navigation:
+
+Dashboard
+Meal Planner
+Pantry
+Shopping List
+Recipes
+Nutrition
+Favorites
+History
+Settings
+
+Bottom of sidebar:
+
+User profile
+Theme toggle
+
+TOP BAR:
+
+Search
+Notifications
+Profile menu
+
+MAIN CONTENT:
+
+Responsive content area.
+
+On mobile:
+
+* Hide desktop sidebar
+* Show compact top header
+* Show mobile bottom navigation
+* Make all cards responsive
+* Tables become mobile-friendly cards
+* Forms become stacked layouts
+
+---
+
+# 5. LANDING PAGE
+
+Create a beautiful landing page at:
+
+/
+
+Hero:
+
+NutriPlan AI
+
+"Plan smarter. Eat better. Spend less."
+
+Description:
+
+"Generate personalized meal plans that fit your budget, nutrition goals, dietary preferences, and the ingredients you already have."
+
+Buttons:
+
+Create My Meal Plan
+Try Demo
+
+Add a modern product dashboard preview.
+
+Create feature sections:
+
+### Smart Meal Planning
+
+Plans based on your nutrition goals.
+
+### Budget Optimization
+
+Stay within your food budget.
+
+### Pantry Intelligence
+
+Use ingredients you already have.
+
+### Nutrition Tracking
+
+Monitor calories, protein, carbs, fats and fiber.
+
+### Smart Shopping List
+
+Automatically calculate what you need to buy.
+
+### Food Waste Reduction
+
+Reuse ingredients intelligently.
+
+Add a "How it works" section:
+
+1. Set your preferences
+2. Add your ingredients
+3. Set your budget
+4. Generate your plan
+5. Shop and cook
+
+Add testimonials using clearly marked demo content.
+
+Add FAQ.
+
+Add footer.
+
+---
+
+# 6. ONBOARDING
+
+Create:
+
+/onboarding
+
+Use a beautiful multi-step wizard.
+
+Progress indicator:
+
+Step 1 of 7
+
+## STEP 1 — GOAL
+
+Options:
+
+Maintain Weight
+Lose Weight
+Gain Weight
+Build Muscle
+Eat Healthier
+
+Use selectable cards.
+
+## STEP 2 — DIET
+
+Options:
+
+Vegetarian
+Vegan
+Eggetarian
+Non-Vegetarian
+Custom
+
+## STEP 3 — BUDGET
+
+Allow:
+
+Daily
+Weekly
+Monthly
+
+Default currency:
+
+INR ₹
+
+Allow user to enter budget.
+
+Example:
+
+₹1500 / week
+
+## STEP 4 — NUTRITION
+
+Fields:
+
+Calories
+Protein
+Carbohydrates
+Fat
+Fiber
+
+Allow "Auto calculate" option.
+
+## STEP 5 — ALLERGIES
+
+Allow selecting:
+
+Peanuts
+Milk
+Egg
+Soy
+Wheat
+Gluten
+Fish
+Shellfish
+Tree nuts
+Sesame
+
+Allow custom allergy.
+
+## STEP 6 — PANTRY
+
+Allow users to add:
+
+Rice
+Dal
+Tomato
+Onion
+Potato
+Egg
+Milk
+Paneer
+Oats
+etc.
+
+Include:
+
+* Add Ingredient
+
+## STEP 7 — PREFERENCES
+
+Cuisine:
+
+South Indian
+North Indian
+Indian
+Mediterranean
+Asian
+Western
+Mixed
+
+Cooking time:
+
+15 min
+30 min
+45 min
+60+ min
+
+Meals per day:
+
+2
+3
+4
+5
+
+Servings:
+
+1
+2
+3
+4+
+
+At the end:
+
+"Generate My Meal Plan"
+
+Save preferences.
+
+---
+
+# 7. DEMO MODE
+
+The application must work immediately even without authentication.
+
+Create a Demo User automatically.
+
+Demo data must include:
+
+* User preferences
+* Pantry items
+* Recipes
+* Nutrition data
+* Prices
+* Example meal plan
+* Shopping list
+
+The user must be able to explore the complete application without creating an account.
+
+Clearly separate demo mode from production authentication.
+
+---
+
+# 8. DASHBOARD
+
+Create:
+
+/dashboard
+
+Header:
+
+"Good morning 👋"
+
+Subtitle:
+
+"Here's your nutrition and meal overview."
+
+Top metric cards:
+
+Today's Calories
+Today's Protein
+Weekly Budget
+Budget Remaining
+
+Example:
+
+Calories
+1,820 / 2,000 kcal
+
+Protein
+104 / 120 g
+
+Budget
+₹1,280 / ₹1,500
+
+Remaining
+₹220
+
+Use animated progress indicators.
+
+---
+
+# 9. TODAY'S MEALS
+
+Show cards:
+
+Breakfast
+Lunch
+Snack
+Dinner
+
+Each card:
+
+Recipe image/placeholder
+Recipe name
+Calories
+Protein
+Cost
+Cooking time
+
+Buttons:
+
+View Recipe
+Replace
+
+---
+
+# 10. NUTRITION CHART
+
+Use Recharts.
+
+Create:
+
+Calories chart
+Protein chart
+Carbs chart
+Fat chart
+
+Show weekly data.
+
+Allow:
+
+Daily
+Weekly
+
+tabs.
+
+---
+
+# 11. BUDGET CARD
+
+Display:
+
+Weekly Budget
+Estimated Spending
+Remaining
+Percentage Used
+
+Create a visual chart.
+
+Example:
+
+Budget: ₹1500
+Estimated: ₹1280
+Remaining: ₹220
+
+If budget is exceeded:
+
+Show warning.
+
+Then offer:
+
+"Optimize Plan"
+
+Clicking this must actually regenerate the meal plan using cheaper recipes.
+
+---
+
+# 12. MEAL PLANNER
+
+Create:
+
+/planner
+
+Provide controls:
+
+Date range
+Budget
+Diet
+Calories
+Protein
+Cuisine
+Cooking time
+Servings
+Pantry usage
+
+Button:
+
+Generate Meal Plan
+
+When clicked:
+
+Show a professional loading state.
+
+Then generate an actual plan.
+
+Display a weekly calendar.
+
+Example:
+
+MONDAY
+
+Breakfast
+Idli + Sambar
+
+Lunch
+Dal Rice
+
+Snack
+Fruit + Curd
+
+Dinner
+Vegetable Dosa
+
+Repeat for the week with variety.
+
+Each meal card must display:
+
+Calories
+Protein
+Carbs
+Fat
+Estimated Cost
+Cooking Time
+
+Buttons:
+
+Replace
+View Recipe
+Favorite
+
+---
+
+# 13. MEAL GENERATION ENGINE
+
+IMPORTANT:
+
+Do NOT simply generate random meals.
+
+Implement a deterministic meal-planning algorithm.
+
+Flow:
+
+User preferences
+↓
+Load recipes
+↓
+Filter allergies
+↓
+Filter dietary restrictions
+↓
+Filter cooking time
+↓
+Calculate nutrition
+↓
+Calculate cost
+↓
+Check pantry
+↓
+Score recipes
+↓
+Optimize daily nutrition
+↓
+Optimize budget
+↓
+Reduce ingredient waste
+↓
+Ensure variety
+↓
+Generate meal plan
+
+Recipe score should consider:
+
+Nutrition Match
+Budget Match
+Pantry Match
+Cuisine Match
+Cooking Time
+Variety
+Ingredient Reuse
+
+Use weighted scoring.
+
+Example:
+
+Nutrition Match = 30%
+Budget = 25%
+Pantry = 20%
+Preference = 10%
+Cooking Time = 10%
+Variety = 5%
+
+Make the weights configurable.
+
+---
+
+# 14. BUDGET OPTIMIZATION
+
+If the generated plan exceeds the user's budget:
+
+Automatically attempt:
+
+1. Replace expensive recipes.
+2. Prefer pantry ingredients.
+3. Replace expensive ingredients with cheaper alternatives.
+4. Increase ingredient reuse.
+5. Select lower-cost recipes.
+
+Do not silently exceed the user's budget.
+
+If no valid plan can satisfy all constraints:
+
+Show:
+
+"Your current requirements cannot be satisfied within ₹X."
+
+Then provide:
+
+Relax Budget
+Relax Calories
+Increase Cooking Time
+Allow More Ingredients
+
+---
+
+# 15. PANTRY PAGE
+
+Create:
+
+/pantry
+
+Display:
+
+Ingredient
+Quantity
+Unit
+Expiry
+Status
+
+Actions:
+
+Add
+Edit
+Delete
+
+Example:
+
+Rice — 2 kg
+Tomato — 500 g
+Dal — 1 kg
+
+Add expiry dates.
+
+Highlight items expiring soon.
+
+Example:
+
+"Tomatoes expire in 2 days."
+
+Use these ingredients preferentially during meal generation.
+
+---
+
+# 16. SHOPPING LIST
+
+Create:
+
+/shopping-list
+
+Automatically calculate required ingredients from the current meal plan.
+
+Subtract pantry quantities.
+
+Example:
+
+Meal plan requires:
+
+Rice: 3 kg
+
+Pantry:
+
+Rice: 2 kg
+
+Shopping list:
+
+Rice: 1 kg
+
+Group items:
+
+Vegetables
+Fruits
+Grains
+Dairy
+Protein
+Spices
+Other
+
+Each item:
+
+Checkbox
+Ingredient
+Quantity
+Estimated price
+
+Allow:
+
+Add item
+Edit item
+Delete item
+Mark purchased
+
+Show:
+
+Total estimated shopping cost.
+
+---
+
+# 17. FOOD WASTE REDUCTION
+
+Implement ingredient consolidation.
+
+Example:
+
+Recipe 1 requires:
+
+200g tomato
+
+Recipe 2:
+
+300g tomato
+
+Recipe 3:
+
+250g tomato
+
+Shopping list should say:
+
+Tomato — 750g
+
+not three separate items.
+
+Use pantry quantities first.
+
+Show:
+
+"You already have 68% of the ingredients required."
+
+Create a small food-waste insight card.
+
+---
+
+# 18. RECIPES
+
+Create:
+
+/recipes
+
+Recipe grid.
+
+Filters:
+
+All
+Vegetarian
+Vegan
+High Protein
+Budget
+Quick
+Indian
+South Indian
+North Indian
+International
+
+Search recipes.
+
+Recipe card:
+
+Image
+Name
+Calories
+Protein
+Cost
+Time
+Diet tags
+
+Create:
+
+/recipes/:id
+
+Recipe detail page.
+
+Display:
+
+Recipe name
+Description
+Ingredients
+Nutrition
+Cost
+Preparation time
+Cooking time
+Servings
+Instructions
+Allergens
+
+Buttons:
+
+Add to Favorites
+Add Ingredients to Shopping List
+Add to Meal Plan
+
+---
+
+# 19. RECIPE DATA
+
+Seed at least 50 realistic recipes.
+
+Include Indian meals:
+
+Idli
+Dosa
+Masala Dosa
+Upma
+Poha
+Vegetable Pulao
+Dal Rice
+Sambar Rice
+Curd Rice
+Lemon Rice
+Tomato Rice
+Khichdi
+Chapati
+Roti
+Paneer Curry
+Palak Paneer
+Egg Curry
+Chicken Curry
+Fish Curry
+Rajma
+Chole
+Sprouts
+Oats
+Vegetable Curry
+etc.
+
+Also include international recipes.
+
+Every recipe needs:
+
+Ingredients
+Calories
+Protein
+Carbs
+Fat
+Fiber
+Cost
+Cooking time
+Diet tags
+Allergens
+
+Clearly mark nutrition and cost values as estimates.
+
+---
+
+# 20. NUTRITION PAGE
+
+Create:
+
+/nutrition
+
+Dashboard showing:
+
+Calories
+Protein
+Carbs
+Fat
+Fiber
+
+Show:
+
+Daily Target
+Consumed
+Remaining
+
+Use:
+
+Progress bars
+Circular charts
+Bar charts
+Line charts
+
+Create weekly nutrition trend.
+
+Add insights:
+
+"Protein intake is below target."
+
+"Your average daily calories are close to your goal."
+
+"Your weekly food cost is 8% below budget."
+
+These insights should be calculated from actual application data.
+
+---
+
+# 21. FAVORITES
+
+Create:
+
+/favorites
+
+Users can save recipes.
+
+Show:
+
+Recipe cards
+Search
+Filter
+Remove favorite
+
+---
+
+# 22. HISTORY
+
+Create:
+
+/history
+
+Show previously generated meal plans.
+
+Columns/cards:
+
+Date
+Duration
+Budget
+Calories
+Protein
+Estimated Cost
+
+Actions:
+
+View
+Duplicate
+Regenerate
+
+Do not permanently destroy historical data unless explicitly requested.
+
+---
+
+# 23. AI ASSISTANT
+
+Create an AI assistant interface.
+
+Button:
+
+"Ask NutriPlan"
+
+Example questions:
+
+"Make this plan cheaper."
+
+"Increase protein."
+
+"I don't have tomatoes."
+
+"Replace dinner."
+
+"Give me a South Indian alternative."
+
+"Make Wednesday dinner under ₹50."
+
+"Use more of my pantry ingredients."
+
+The AI assistant must operate on top of the meal planner.
+
+It must NOT override:
+
+* Allergies
+* Dietary restrictions
+* Hard budget limits
+
+Create an AI service abstraction.
+
+Use environment variables for API keys.
+
+Do not put API keys in frontend code.
+
+If no AI API key exists, provide a rule-based fallback assistant so the website remains functional.
+
+---
+
+# 24. ALLERGY SAFETY
+
+Allergy filtering must happen before recipe selection.
+
+Example:
+
+If user selects:
+
+Peanut
+
+Exclude:
+
+Peanut
+Groundnut
+Peanut Butter
+
+Create ingredient aliases.
+
+Do not recommend recipes containing excluded allergens.
+
+Display allergen information on recipe pages.
+
+---
+
+# 25. DATABASE
+
+Create PostgreSQL schema.
+
+Tables:
+
+users
+
+user_preferences
+
+ingredients
+
+recipes
+
+recipe_ingredients
+
+pantry_items
+
+meal_plans
+
+meals
+
+shopping_lists
+
+shopping_items
+
+favorites
+
+nutrition_logs
+
+Create proper:
+
+Primary keys
+Foreign keys
+Indexes
+Timestamps
+
+Use Drizzle ORM.
+
+Create migrations.
+
+Create seed script.
+
+---
+
+# 26. BACKEND API
+
+Create REST API endpoints.
+
+Examples:
+
+GET /api/recipes
+
+GET /api/recipes/:id
+
+GET /api/pantry
+
+POST /api/pantry
+
+PUT /api/pantry/:id
+
+DELETE /api/pantry/:id
+
+GET /api/preferences
+
+PUT /api/preferences
+
+POST /api/meal-plans/generate
+
+GET /api/meal-plans
+
+GET /api/meal-plans/:id
+
+POST /api/meal-plans/:id/replace-meal
+
+POST /api/meal-plans/:id/optimize-budget
+
+GET /api/shopping-list/:mealPlanId
+
+POST /api/shopping-list/items
+
+PUT /api/shopping-list/items/:id
+
+DELETE /api/shopping-list/items/:id
+
+POST /api/favorites
+
+DELETE /api/favorites/:id
+
+GET /api/nutrition
+
+Create proper error handling.
+
+Return JSON.
+
+Validate request bodies with Zod.
+
+---
+
+# 27. AUTHENTICATION
+
+Implement a clean authentication architecture.
+
+For the prototype, support:
+
+Demo Mode
+
+and structure the code so authentication can later support:
+
+Email/password
+Google OAuth
+
+Do not block the application from working if authentication environment variables are not configured.
+
+---
+
+# 28. SEARCH
+
+Add global search.
+
+Search:
+
+Recipes
+Ingredients
+Meal plans
+
+Create a command-palette style search experience.
+
+Keyboard shortcut:
+
+Ctrl + K
+
+---
+
+# 29. NOTIFICATIONS
+
+Create notification dropdown.
+
+Examples:
+
+"Your meal plan is ready."
+
+"Tomatoes expire soon."
+
+"You are ₹220 under budget."
+
+"Your protein target is low today."
+
+---
+
+# 30. SETTINGS
+
+Create:
+
+/settings
+
+Sections:
+
+Profile
+Diet Preferences
+Nutrition Targets
+Budget
+Allergies
+Appearance
+Notifications
+
+Allow editing all preferences.
+
+Changes must actually affect future meal generation.
+
+---
+
+# 31. ACCESSIBILITY
+
+Implement:
+
+* Semantic HTML
+* Keyboard navigation
+* Focus states
+* ARIA labels where needed
+* Accessible forms
+* Good contrast
+* Screen-reader-friendly buttons
+
+---
+
+# 32. PERFORMANCE
+
+Optimize for low-end devices.
+
+Use:
+
+* Lazy loading
+* Memoization where useful
+* Efficient API calls
+* Pagination where needed
+* Optimized rendering
+
+Do not load all recipes unnecessarily.
+
+---
+
+# 33. ERROR HANDLING
+
+Implement:
+
+* Loading states
+* Empty states
+* Error states
+* Retry buttons
+* Toast notifications
+* Friendly error messages
+
+Never display raw server/database errors to normal users.
+
+---
+
+# 34. MOBILE EXPERIENCE
+
+The mobile version must feel like a real application.
+
+Use:
+
+* Bottom navigation
+* Swipe-friendly cards
+* Large touch targets
+* Sticky actions where useful
+* Responsive charts
+* Mobile-friendly forms
+
+Test at:
+
+375px
+390px
+768px
+1024px
+1440px
+
+---
+
+# 35. SAMPLE DEMO USER
+
+Create a demo profile:
+
+Goal:
+Build Muscle
+
+Diet:
+Vegetarian
+
+Budget:
+₹1500/week
+
+Calories:
+2200/day
+
+Protein:
+120g/day
+
+Cuisine:
+Indian/South Indian
+
+Cooking time:
+30 minutes
+
+Pantry:
+
+Rice
+Dal
+Oats
+Tomato
+Onion
+Potato
+Paneer
+Curd
+
+Use this demo data throughout the initial experience.
+
+---
+
+# 36. INITIAL EXPERIENCE
+
+When the application opens:
+
+Show the landing page.
+
+Click:
+
+"Try Demo"
+
+→ Enter dashboard.
+
+The dashboard must already contain realistic data.
+
+Click:
+
+"Create My Meal Plan"
+
+→ Open onboarding.
+
+Complete onboarding.
+
+Click:
+
+"Generate My Meal Plan"
+
+→ Generate actual meal plan.
+
+Then allow the user to explore:
+
+Dashboard
+Planner
+Pantry
+Recipes
+Nutrition
+Shopping List
+Favorites
+History
+
+All major features must work.
+
+---
+
+# 37. UI DETAILS
+
+Use reusable components.
+
+Create:
+
+Sidebar
+MobileNavigation
+TopBar
+MetricCard
+MealCard
+RecipeCard
+NutritionCard
+BudgetCard
+ProgressBar
+NutritionChart
+MealCalendar
+PantryTable
+ShoppingList
+IngredientSelector
+GeneratePlanDialog
+ReplaceMealDialog
+AIChat
+NotificationDropdown
+SearchCommand
+EmptyState
+LoadingState
+ErrorState
+
+Avoid duplicate code.
+
+---
+
+# 38. DATA INTEGRITY
+
+Meal plans must store the recipes selected at generation time.
+
+Shopping lists must be derived from the selected meal plan.
+
+Nutrition totals must be calculated from recipe nutrition data.
+
+Budget totals must be calculated from ingredient/recipe costs.
+
+Do not hard-code dashboard numbers.
+
+Dashboard numbers must come from application data.
+
+---
+
+# 39. IMPORTANT: NO FAKE FUNCTIONALITY
+
+Do not create buttons that only show:
+
+"Coming soon"
+
+for core features.
+
+These features MUST work:
+
+* Generate meal plan
+* Replace meal
+* Optimize budget
+* Add pantry item
+* Edit pantry item
+* Delete pantry item
+* Add recipe
+* Favorite recipe
+* Generate shopping list
+* Mark shopping item purchased
+* Search recipes
+* Nutrition calculation
+* Budget calculation
+* View meal-plan history
+* Duplicate meal plan
+* Dark mode
+* Responsive navigation
+
+---
+
+# 40. FINAL TESTING
+
+After implementation:
+
+Run:
+
+npm run build
+
+and the development server.
+
+Fix every:
+
+TypeScript error
+Runtime error
+Import error
+Routing error
+Database error
+API error
+UI overflow
+Mobile layout issue
+
+Test all major user flows.
+
+Test:
+
+Landing page
+Demo mode
+Onboarding
+Meal generation
+Meal replacement
+Budget optimization
+Pantry
+Shopping list
+Recipe details
+Favorites
+Nutrition
+History
+Settings
+Dark mode
+Mobile layout
+
+Do not tell me the project is complete if major features are not functional.
+
+---
+
+# 41. README
+
+Create a complete README containing:
+
+Project overview
+Features
+Technology stack
+Architecture
+Database schema
+How meal generation works
+How budget optimization works
+How pantry optimization works
+API documentation
+Environment variables
+Local setup
+Database setup
+Seed instructions
+Build instructions
+Future improvements
+
+Make the README portfolio/interview friendly.
+
+---
+
+# 42. PROJECT QUALITY
+
+The final result should feel like:
+
+A real modern startup product.
+
+Not:
+
+A basic college CRUD project.
+
+The most important differentiating functionality is:
+
+1. Budget-aware meal planning
+2. Nutrition-aware optimization
+3. Pantry-aware meal generation
+4. Ingredient reuse
+5. Food-waste reduction
+6. Automatic shopping list
+7. Intelligent meal replacement
+8. Budget optimization
+9. Nutrition analytics
+10. AI assistant with deterministic fallback
+
+---
+
+# 43. BUILD IN THIS ORDER
+
+You are responsible for completing the whole application.
+
+Build in this order:
+
+1. Project setup
+2. UI system
+3. Application shell
+4. Routing
+5. Database
+6. Seed data
+7. Backend APIs
+8. Landing page
+9. Demo mode
+10. Onboarding
+11. Dashboard
+12. Recipe system
+13. Pantry
+14. Nutrition calculations
+15. Budget engine
+16. Meal generation engine
+17. Meal planner
+18. Meal replacement
+19. Shopping list
+20. Nutrition dashboard
+21. Favorites
+22. History
+23. Settings
+24. AI assistant
+25. Authentication architecture
+26. Responsive optimization
+27. Accessibility
+28. Error handling
+29. Testing
+30. Final polish
+
+Do not skip the backend.
+
+Do not replace functional logic with mock UI.
+
+Do not stop after Phase 1.
+
+Continue until the application is fully functional.
+
+At the end, run the application and verify the complete user journey from landing page → onboarding → meal generation → shopping list → nutrition dashboard.
+
+If you encounter an error, diagnose the root cause, fix it, and continue building.
+
+Start building the complete application now.
